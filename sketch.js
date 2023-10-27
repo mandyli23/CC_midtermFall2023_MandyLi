@@ -1,29 +1,40 @@
+let balls = [];
+let ball = 0;
+let newBalls = [];
 
 function setup() {
   createCanvas(800, 800);
 }
 
 function draw() {
-  if (option == 1) {    //option 1
-    background(130, 225, 40);
-      noStroke();
-      ellipse(width/2, height/2, 700 , 700);
-        for(x = mouseX; x <= 700 && x >= 100; x++ ){
-        oneDisease();
-          if(x == 700 || x == 100){
-          mouseX + oneDisease();  //probably need to change this from func to OOP in order to duplicate
-              
-          }//if
-          
-    background(0, 0, 255);
- function oneDisease(){  
-  map(mouseX, 0, 10, 0, 800);
-    option++;
-    if( option >= 4) {
-      option = 1;
+  background(130, 225, 40);
+
+  for (let i = 0; i < balls.length; i++) {
+    balls[i].move();
+    balls[i].display();
+    for (let j = 0; j < balls.length; j++) {
+      if (i !== j && balls[i].intersects(balls[j])) {
+        let newX1 = random(width);
+        let newY1 = random(height);
+        let newX2 = random(width);
+        let newY2 = random(height);
+      
+        newBalls.push(new Ball(newX1, newY1, random(-1, 1), random(-2, 2)));
+        newBalls.push(new Ball(newX2, newY2, random(-1, 1), random(-2, 2)));
+      } 
     }
   }
+  for (let i = newBalls.length - 1; i >= 0; i--) {
+    newBalls[i].move();
+    newBalls[i].display();
+    if (newBalls[i].x < 0 || newBalls[i].x > width || newBalls[i].y < 0 || newBalls[i].y > height) {
+      newBalls.splice(i, 1); // had to remove balls because the screen froze
+    }
+  }
+}
 
 
-  
+function mousePressed() {
+  balls.push(new Ball(mouseX, mouseY));
+}
 
