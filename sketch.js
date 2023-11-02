@@ -1,17 +1,37 @@
 let balls = [];
 let ball = 0;
 let newBalls = [];
+ let balls2 = [];
+ let bal = 20;
+ let sc2tm = true;
+ //let c = 1; //c for color
+// c = c++;
+
+
+let option = 1;
+
+ //time control scene 2
+let scene2StartTime;
+let scene2Duration = 20000; //20sec
+let startColor;
+let endColor;
 
 function setup() {
   createCanvas(800, 800);
+   startColor = color(255, 0, 0, 15); // Initial color (red)
+   endColor = color(0, 255, 20); // Final color (green)
+    // Set the start time for scene 2
 }
 
-let option = 0;
+
+
+
 
 function draw() {
   background(255, 225, 255);
 
   if(option === 1){
+  
   for (let i = 0; i < balls.length; i++) {
     balls[i].move();
     balls[i].display();
@@ -38,56 +58,109 @@ function draw() {
 
 if (option === 2){
   //scene2
-  background(255, 225, 255);
+newBalls.splice(0, newBalls.length);
+balls.splice(0, balls.length);
+
+  background(0);
+
+ 
   //scale(random(1, 3));
   myCellCluster(0);
-  myCellCluster(200);
-  myCellCluster(400);
-  myCellCluster(600);
-  myCellCluster(800);
-}
 
-}
+  for (let m = 0; m < balls2.length; m++) {
+    balls2[m].move();
+    balls2[m].display(50,0);
 
-if (option === 2){
-function keyPressed() {
-  noLoop();
+  
+  }
+}//option 2
+}//draw function
+
+//key/mouse controls
+function keyTyped() {
+  if (option === 2 && key === 'q') {
+    noLoop(); 
+  }
 }
 
 function keyReleased() {
+  if (option === 2 && key === 'q'){
   loop();
 }
 }
 
-if (option === 1){
+
 function mousePressed() {
+  if (option === 1){
   balls.push(new Ball(mouseX, mouseY));
-}
+  } else if (option === 2) {
+  balls2.push(new Bal(random(800), random(300)));
+  currentTime = millis();
 }
 
+}
+
+
+
 function myCell(x1, y1, a1, a2) { //this function is for one blinking cell
+
+  if(sc2tm){
+    scene2StartTime = millis();
+    sc2tm = false;
+  }
+  frameRate(15);
   noStroke();
-  //fill(random(y/2,0, x/4));
-  fill((x1-100)/1.5,0, 0);
+  fill(255, 0, 0);
+
+  let currentTime = millis() - scene2StartTime;
+
+  if (currentTime < scene2Duration) {
+    let interColor = lerpColor(startColor, endColor, currentTime / scene2Duration);  //lerp color used to gradient to new color
+    fill(interColor);
+
+  //fill(200,y1/1.5, 0, y1/(3));
   ellipse (x1, y1, a1, a2);
+  }else {
+    // Once the duration is reached, set to the final color
+    fill(endColor);
+    ellipse (x1, y1, a1, a2);
   
+  }
+
 }
 
 function myCellCluster(y){
-  myCell(0, y,random(100),random(300));
-  myCell(400, y,random(100),random(300));
-  myCell(300, y,random(100),random(300));
-  myCell(200, y,random(100),random(300));
-  myCell(100, y,random(100),random(300));
-  myCell(500, y,random(100),random(300));
-  myCell(600, y,random(100),random(300));
-  myCell(700, y,random(100),random(300));
-  myCell(800, y,random(100),random(300));
+
+  for(i = y; i <= 800; i += 200){
+    myCell(0, i,random(20),random(300));
+    myCell(400, i,random(20),random(300));
+    myCell(300, i,random(20),random(300));
+    myCell(200, i,random(20),random(300));
+    myCell(100, i,random(20),random(300));
+    myCell(500, i,random(20),random(300));
+    myCell(600, i,random(20),random(300));
+    myCell(700, i,random(20),random(300));
+    myCell(800, i,random(20),random(300));
+  }
+  
+
 }
 
-function mousePressed(){
-  option++;
-  if(option > 3) {
-    option = 1;
+function ballDisease(x2, y2, a3, a4){
+  fill(0, 255, 0)
+  ellipse (x2, y2, a3, a4);
+ 
+  
+}
+
+function keyTyped() {
+  if (key === 'w') {
+    option++;
+ if (option > 2) {
+    option = 1; 
+    sc2tm = true;
   }
+
+  console.log(option);
+}
 }

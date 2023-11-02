@@ -1,7 +1,7 @@
-class Ball {
-    constructor(newX, newY) {   //x & y location parameters
-      this.x = newX;
-      this.y = newY;
+class Bal {
+    constructor(newP, newO) {   //x & y location parameters
+      this.p = newP;
+      this.o = newO;
       this.r = 25;   //radius
       this.xSpeed = random(-2, 2);  //random speeds 
       this.ySpeed = random(-2, 2);
@@ -21,16 +21,16 @@ class Ball {
     }
   
     display() {
-      fill(0, 255, 0);
+      fill(0, 255, 0, 220);
       noStroke();
-      ellipse(this.x, this.y, this.r * 2);
-    }
-  
-    intersects(other) {
-      let d = dist(this.x, this.y, other.x, other.y); //checking distance between two circles and their radii
-      return d < this.r + other.r; //boolean to check distance
+      ellipse(this.p, this.o, random(this.r));
+      fill(135, 0, 0);
+      ellipse(this.p, this.o, random(this.r*2));
+      this.o = this.o + 5;
+      
     }
   
     
-  }
   
+    
+  }
