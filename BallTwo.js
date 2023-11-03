@@ -24,7 +24,7 @@ class Bal {
       fill(0, 255, 0, 220);
       noStroke();
       ellipse(this.p, this.o, random(this.r));
-      fill(135, 0, 0);
+      fill(0, 230, 0);
       ellipse(this.p, this.o, random(this.r*2));
       this.o = this.o + 5;
       

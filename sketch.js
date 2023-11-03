@@ -1,10 +1,14 @@
 let balls = [];
 let ball = 0;
 let newBalls = [];
- let balls2 = [];
- let bal = 20;
- let sc2tm = true;
- //let c = 1; //c for color
+let balls2 = [];
+let bal = 0;
+let sc2tm = true;
+let dudes = [];
+let ddx = [100, 150,200,205,300,350];
+let ddy = [100, 150,200,205,300,350];
+
+//let c = 1; //c for color
 // c = c++;
 
 
@@ -15,12 +19,18 @@ let scene2StartTime;
 let scene2Duration = 20000; //20sec
 let startColor;
 let endColor;
-
+let x3;
+let y3;
 function setup() {
   createCanvas(800, 800);
-   startColor = color(255, 0, 0, 15); // Initial color (red)
-   endColor = color(0, 255, 20); // Final color (green)
-    // Set the start time for scene 2
+  startColor = color(255, 0, 0, 15); // Initial color (red)
+  endColor = color(0, 255, 20); // Final color (green)
+  // Set the start time for scene 2
+  for(i = 0; 1 < 5; i ++){
+    dudes[i] = new Dude(ddx[i], ddy[i]);
+  }
+  
+  
 }
 
 
@@ -67,14 +77,27 @@ balls.splice(0, balls.length);
   //scale(random(1, 3));
   myCellCluster(0);
 
-  for (let m = 0; m < balls2.length; m++) {
-    balls2[m].move();
-    balls2[m].display(50,0);
+  for (let i = 0; i< balls2.length; i++) {
+    balls2[i].move();
+    balls2[i].display(50,0);
 
   
   }
 }//option 2
+
+if (option === 3){
+  background(160, 160, 190);
+ 
+  for(i = 0; i<6; i++){
+    dudes[i].display();
+  }
+  
+
+}//option 3
 }//draw function
+
+
+
 
 //key/mouse controls
 function keyTyped() {
@@ -100,6 +123,9 @@ function mousePressed() {
 
 }
 
+function mouseDragged(){
+ //diseases[i].move(new Ball(mouseX, mouseY));
+}
 
 
 function myCell(x1, y1, a1, a2) { //this function is for one blinking cell
@@ -146,17 +172,12 @@ function myCellCluster(y){
 
 }
 
-function ballDisease(x2, y2, a3, a4){
-  fill(0, 255, 0)
-  ellipse (x2, y2, a3, a4);
- 
-  
-}
+
 
 function keyTyped() {
   if (key === 'w') {
     option++;
- if (option > 2) {
+ if (option > 3) {
     option = 1; 
     sc2tm = true;
   }
