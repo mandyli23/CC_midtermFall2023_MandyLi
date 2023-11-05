@@ -5,6 +5,7 @@ class Ball {
       this.r = 25;   //radius
       this.xSpeed = random(-2, 2);  //random speeds 
       this.ySpeed = random(-2, 2);
+      
     }
   
     move() {
@@ -19,11 +20,26 @@ class Ball {
         this.ySpeed *= -1;
       }
     }
-  
+    
+
     display() {
-      fill(0, 255, 0);
+      fill(0, 250, 0);
       noStroke();
       ellipse(this.x, this.y, this.r * 2);
+      //stroke();
+     //fill(200, 100, 0);
+     // fill(200, 20, 0);
+      ellipse(this.x + 41, this.y +15, this.r/1.3);
+      fill(0, 250, 0);
+      ellipse(this.x + 20, this.y -30, this.r/2);
+    //  fill(200, 20, 0);
+      ellipse(this.x -27, this.y - 30, this.r/1.3);
+      fill(0, 250, 0);
+      ellipse(this.x -35, this.y +14, this.r/2);
+   //   fill(200, 20, 0);
+      ellipse(this.x -8, this.y +43, this.r/1.3);
+  
+    
     }
   
     intersects(other) {
@@ -33,4 +49,44 @@ class Ball {
   
     
   }
+
+
+  //cool effects I found while experimenting with code
+
+  
+  // ellipse(this.x + 21, this.y +5, this.r);
+  // ellipse(this.x + 10, this.y -20, this.r/2);
+  // ellipse(this.x -17, this.y - 20, this.r);
+  // ellipse(this.x -25, this.y +4, this.r/2);
+  // ellipse(this.x -3, this.y +23, this.r/2);
+
+
+  // display() {
+  //   fill(0, 255, 0);
+  //   noStroke();
+  //   ellipse(this.x, this.y, this.r * 2);
+  //   stroke(1);
+  //   if(this.r = 10, i > 0, i++){
+  //   line(0,130, 160, 170);
+  //   }
+  //   ellipse(this.x, this.y, this.r);
+  // }
+
+  // display() {
+  //   fill(0, 255, 0);
+  //   noStroke();
+  //   ellipse(this.x, this.y, this.r * 2);
+  //   stroke(1);
+  //   line(this.x = 20,this.x =20,this.y = 20,this.y =20);
+  //   ellipse(this.x, this.y, this.r);
+  // }
+    
+  // display() {
+  //   fill(0, 255, 0);
+  //   noStroke();
+  //   ellipse(this.x, this.y, this.r * 2);
+  //   stroke(1);
+  //   line(this.x += 20,this.x +=20,this.y -= 20,this.y -=20);
+  //   ellipse(this.x, this.y, this.r);
+  // }
   

@@ -1,7 +1,7 @@
 class Bal {
-    constructor(newP, newO) {   //x & y location parameters
-      this.p = newP;
-      this.o = newO;
+    constructor(newX, newY) {   //x & y location parameters
+      this.x = newX;
+      this.y = newY;
       this.r = 25;   //radius
       this.xSpeed = random(-2, 2);  //random speeds 
       this.ySpeed = random(-2, 2);
@@ -23,10 +23,10 @@ class Bal {
     display() {
       fill(0, 255, 0, 220);
       noStroke();
-      ellipse(this.p, this.o, random(this.r));
+      ellipse(this.x, this.y, random(this.r));
       fill(0, 230, 0);
-      ellipse(this.p, this.o, random(this.r*2));
-      this.o = this.o + 5;
+      ellipse(this.x, this.y, random(this.r*2));
+      this.y = this.y + 5;
       
     }
   

@@ -3,10 +3,11 @@ let ball = 0;
 let newBalls = [];
 let balls2 = [];
 let bal = 0;
-let sc2tm = true;
+let sc2tm = true;//scene 2 boolean to reset color
+let i = 0;
 let dudes = [];
-let ddx = [100, 150,200,205,300,350];
-let ddy = [100, 150,200,205,300,350];
+let ddx = [100, 600,200, 500,700,750];  //array of locations for dudes
+let ddy = [100, 150, 500, 500,700,350];
 
 //let c = 1; //c for color
 // c = c++;
@@ -19,15 +20,14 @@ let scene2StartTime;
 let scene2Duration = 20000; //20sec
 let startColor;
 let endColor;
-let x3;
-let y3;
+
 function setup() {
   createCanvas(800, 800);
-  startColor = color(255, 0, 0, 15); // Initial color (red)
+  startColor = color(255, 0, 0, 150); // Initial color (red)
   endColor = color(0, 255, 20); // Final color (green)
-  // Set the start time for scene 2
-  for(i = 0; 1 < 5; i ++){
-    dudes[i] = new Dude(ddx[i], ddy[i]);
+  //Set the start time for scene 2
+  for(i = 0; i < 6; i ++){
+    dudes[i] = new Dude(ddx[i], ddy[i]); 
   }
   
   
@@ -52,7 +52,7 @@ function draw() {
         let newX2 = random(width);
         let newY2 = random(height);
       
-        newBalls.push(new Ball(newX1, newY1, random(-1, 1), random(-2, 2)));
+        newBalls.push(new Ball(newX1, newY1, random(-1, 1), random(-2, 2))); //adding new balls after intersection
         newBalls.push(new Ball(newX2, newY2, random(-1, 1), random(-2, 2)));
       } 
     }
@@ -71,11 +71,9 @@ if (option === 2){
 newBalls.splice(0, newBalls.length);
 balls.splice(0, balls.length);
 
-  background(0);
+background(0);
 
- 
-  //scale(random(1, 3));
-  myCellCluster(0);
+myCellCluster(0); //blood
 
   for (let i = 0; i< balls2.length; i++) {
     balls2[i].move();
@@ -123,16 +121,14 @@ function mousePressed() {
 
 }
 
-function mouseDragged(){
- //diseases[i].move(new Ball(mouseX, mouseY));
-}
+
 
 
 function myCell(x1, y1, a1, a2) { //this function is for one blinking cell
 
-  if(sc2tm){
+  if(sc2tm){  //when scene 2 starts, the value is initially true, allowing for millis to start tracking time
     scene2StartTime = millis();
-    sc2tm = false;
+    sc2tm = false;  //sets to false so that color can change only within scene 2
   }
   frameRate(15);
   noStroke();
@@ -157,7 +153,7 @@ function myCell(x1, y1, a1, a2) { //this function is for one blinking cell
 
 function myCellCluster(y){
 
-  for(i = y; i <= 800; i += 200){
+  for(i = y; i <= 800; i += 200){ //add "my cell" on the y axis in increments of 200
     myCell(0, i,random(20),random(300));
     myCell(400, i,random(20),random(300));
     myCell(300, i,random(20),random(300));
