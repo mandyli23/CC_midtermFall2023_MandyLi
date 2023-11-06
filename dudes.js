@@ -13,7 +13,7 @@ class Aura {
   }
   
   left(){
-    this.x += 10;
+    this.x += 20;
   }
 
   right(){
@@ -29,10 +29,7 @@ class Aura {
   }
 
 
-  intersects(other) {
-    let d = dist(this.x, this.y, other.x, other.y); //checking distance between two circles and their radii
-    return d < this.r + other.r; //boolean to check distance
-  }
+
 }
 
 class Diseased {
@@ -51,7 +48,7 @@ class Diseased {
     
   }
   left(){
-    this.x += 10;
+    this.x += 20;
   }
 
   right(){
@@ -86,8 +83,31 @@ class Dude {
         
       }
 
+      checkProximity(otherX, otherY) {
+        let d = dist(this.x, this.y, otherX, otherY);
+        return d; //< 50; // Adjust this value based on how close you want the Dudes to trigger an aura appearance
+      }
+    
+      // Determine whether the Dude is close to another Dude and create new aura if so
+     
+ 
+
+      createAuraIfClose(aura) {
+        for (let i = 0; i < aura.length; i++) {
+          let location = aura[i];
+          let newAura = new Aura(location.x, location.y);
+          aura.push(newAura);
+        }
+      }
+    
+      
+      
+      
+    
+      
+
       left(){
-        this.x += 10;
+        this.x += 20;
       }
 
       right(){

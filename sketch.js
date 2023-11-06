@@ -1,36 +1,37 @@
 let balls = [];
 let ball = 0;
 let newBalls = [];
+//
 let balls2 = [];
 let bal = 0;
 let sc2tm = true;//scene 2 boolean to reset color
-
+//
 let balls3 =[];
 let b = 0;
-
-let i = 0;
+let newdudes = [];
+//
 let dudes = [];
-let ddx = [100, 600,200, 500,700,750];  //array of locations for dudes
-let ddy = [100, 150, 500, 500,700,350];
-
+let ddx = [100, 600,200, 500,100,750];  //array of locations for dudes
+let ddy = [100, 150, 500, 500,400,350];
+//
 let aura = [];   //array of aura for dudes
-let ax = [100];  //only show at first
-let ay = [100];
-
+let ax = [100, 600,200, 500,100,750];  
+ let ay = [100, 150, 500, 500,400,350];
+//
 let diseased = [];  //array thats flashes disease aura
-let dx = [100];    //only show at first
-let dy = [100];
-
-
-
-
+let dx = [100, 600,200, 500,100,750];    
+let dy = [100, 150, 500, 500,400,350];
+//
 let option = 1;
-
+let i = 0;
  //time control scene 2
 let scene2StartTime;
 let scene2Duration = 20000; //20sec
 let startColor;
 let endColor;
+
+let show = [];
+show = [true, false,false,false,false,false]; //array to check if a dude is diseased or not
 
 function setup() {
   createCanvas(800, 800);
@@ -98,7 +99,7 @@ myCellCluster(0); //blood
 }//option 2
 
 if (option === 3){
-  background(255);
+  background(250, 200, 25);
   balls2.splice(0, balls2.length);
   //background(255, 246,25);
   
@@ -132,20 +133,30 @@ if (option === 3){
 }//option 3
 
 
-if (option === 4){
+
+if (option === 4) {
   background(160, 160, 190);
 
-
-
-  for(i = 0; i<6; i++){
+  for (i = 0; i < 6; i++) {
+    noStroke();
     dudes[i].display();
-    aura[i].display();
-    diseased[i].display();
+    
+  }
+  aura[0].display();
+  diseased[0].display();
+
+  for(i=1;i < 6;i++){  //doesnt affect first dude
+    if(dudes[0].checkProximity(ddx[i],ddy[i]) < 50){ //checks how close dudes are to eachother starting at i = 1
+      show[i] = true; //changes false's in array to true after each loop
+    }
   }
 
-
- 
-
+  for(i=1;i < 6;i++){ //shows if its true
+    if(show[i]){
+      aura[i].display();
+      diseased[i].display();
+    }
+  }
 }//option 3
 
 
@@ -155,8 +166,6 @@ if (option === 4){
 
 
 //key/mouse controls
-
-
 function keyPressed() {
   if (key === 'd') {
     // Move left - d
